@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,11 +14,11 @@ class _HomePageState extends State<HomePage> {
   Color hintcolor = Color.fromARGB(255, 74, 74, 74);
   Color bgcolor = Colors.white;
   TextEditingController textEditingController1 = TextEditingController();
-  String text1 = "1";
+  //String text1 = "1";
   @override
   void initState() {
     super.initState();
-    textEditingController1 = TextEditingController(text: "1");
+    textEditingController1 = TextEditingController(); //text: "1");
   }
 
   @override
@@ -54,8 +52,11 @@ class _HomePageState extends State<HomePage> {
                       controller: textEditingController1,
                       style: TextStyle(color: textcolor, fontSize: 24),
                       decoration: InputDecoration(
-                        labelText: "Enter Number",
-                        labelStyle: TextStyle(color: hintcolor, fontSize: 24),
+                        labelText: "Enter a Number",
+                        labelStyle: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: hintcolor,
+                            fontSize: 24),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide:
