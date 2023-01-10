@@ -10,15 +10,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String str = "";
   Color textcolor = Colors.black;
   Color hintcolor = Color.fromARGB(255, 74, 74, 74);
   Color bgcolor = Colors.white;
-  TextEditingController textEditingController1 = TextEditingController();
-  //String text1 = "1";
-  @override
-  void initState() {
-    super.initState();
-    textEditingController1 = TextEditingController(); //text: "1");
+  TextEditingController textEditingController = TextEditingController();
+
+  bool prime(int num) {
+    //int num = int.parse(textEditingController.text);
+    if (num == 1) {
+      print("1 is neither prime nor composite");
+      return false;
+    } else {
+      for (var i = 2; i <= num / i; ++i) {
+        if (num % i == 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    print("prime");
+    print(num);
   }
 
   @override
@@ -49,12 +62,12 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(top: 8.0, bottom: 18),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
-                      controller: textEditingController1,
+                      controller: textEditingController,
                       style: TextStyle(color: textcolor, fontSize: 24),
                       decoration: InputDecoration(
                         labelText: "Enter a Number",
                         labelStyle: TextStyle(
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                             color: hintcolor,
                             fontSize: 24),
                         focusedBorder: OutlineInputBorder(
@@ -70,13 +83,27 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Text("1 is neither prime nor composite")
+                  Text(
+                    str,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ],
               ),
               InkWell(
                 onTap: () {
                   setState(() {
-                    int min = int.parse(textEditingController1.text);
+                    int num = int.parse(textEditingController.text);
+                    if (num == 1) {
+                      str = "1 is neither prime nor composite number";
+                    } else if (prime(num)) {
+                      str = "${textEditingController.text} is prime number";
+                    } else {
+                      str =
+                          "${textEditingController.text} is not a prime number";
+                    }
                   });
                 },
                 child: Container(
