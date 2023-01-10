@@ -11,6 +11,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String str = "";
+  String str1 = "";
+  List<int> result = [];
   Color textcolor = Colors.black;
   Color hintcolor = Color.fromARGB(255, 74, 74, 74);
   Color bgcolor = Colors.white;
@@ -32,6 +34,15 @@ class _HomePageState extends State<HomePage> {
 
     print("prime");
     print(num);
+  }
+
+  List<int> factors(int n) {
+    for (int i = 1; i <= n; i++) {
+      if (n % i == 0) {
+        result.add(i);
+      }
+    }
+    return result;
   }
 
   @override
@@ -57,9 +68,10 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 18),
+                    padding: const EdgeInsets.only(top: 4.0, bottom: 18),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       controller: textEditingController,
@@ -83,26 +95,81 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+                  Center(
+                    child: Text(
+                      str,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
                   Text(
-                    str,
+                    str1,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 24,
                         fontWeight: FontWeight.w500),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 18.0, bottom: 18),
+                    child: Container(
+                      width: width,
+                      height: width,
+                      // child: Wrap(
+                      //   spacing: 6.0,
+                      //   runSpacing: 6.0,
+                      //   children:
+                      //       List<Widget>.generate(result.length, (int index) {
+                      //     return Chip(
+                      //       label: Text(result[index].toString()),
+                      //     );
+                      //   }),
+                      // ),
+
+                      // child: ListView.builder(
+                      //   itemCount: result.length,
+                      //   itemBuilder: (BuildContext context, int index) {
+                      //     return Container(
+                      //       height: 50,
+                      //       child: Center(child: Text('${result[index]}')),
+                      //     );
+                      //   },
+                      // ),
+                      child: Text("$result"),
+                      // child: GridView.count(
+                      //   crossAxisCount: 5,
+                      //   children: List.generate(result.length, (index) {
+                      //     return Center(
+                      //       child: Text(
+                      //         '$index',
+                      //         style: Theme.of(context).textTheme.headline5,
+                      //       ),
+                      //     );
+                      //   }),
+                      // ),
+                    ),
                   ),
                 ],
               ),
               InkWell(
                 onTap: () {
                   setState(() {
+                    result = [];
+                    str1 = " Factors of ${textEditingController.text}:";
                     int num = int.parse(textEditingController.text);
                     if (num == 1) {
+                      result = [1];
                       str = "1 is neither prime nor composite number";
                     } else if (prime(num)) {
                       str = "${textEditingController.text} is prime number";
                     } else {
                       str =
-                          "${textEditingController.text} is not a prime number";
+                          "${textEditingController.text} is a composite number";
+                      print(factors(num));
                     }
                   });
                 },
