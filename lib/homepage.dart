@@ -118,7 +118,8 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(top: 18.0, bottom: 18),
                     child: Container(
                       width: width,
-                      height: width,
+                      height: width - 20,
+
                       // child: Wrap(
                       //   spacing: 6.0,
                       //   runSpacing: 6.0,
@@ -128,24 +129,23 @@ class _HomePageState extends State<HomePage> {
                       //       label: Text(result[index].toString()),
                       //     );
                       //   }),
-                      // ),
-
-                      // child: ListView.builder(
-                      //   itemCount: result.length,
-                      //   itemBuilder: (BuildContext context, int index) {
-                      //     return Container(
-                      //       height: 50,
-                      //       child: Center(child: Text('${result[index]}')),
-                      //     );
-                      //   },
-                      // ),
-                      child: Text("$result"),
+                      //),
+                      child: ListView.builder(
+                        itemCount: result.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            height: 50,
+                            child: Center(child: Text('${result[index]}')),
+                          );
+                        },
+                      ),
                       // child: GridView.count(
                       //   crossAxisCount: 5,
                       //   children: List.generate(result.length, (index) {
                       //     return Center(
                       //       child: Text(
-                      //         '$index',
+                      //         result[index].toString(),
+                      //         //'$index',
                       //         style: Theme.of(context).textTheme.headline5,
                       //       ),
                       //     );
@@ -166,10 +166,11 @@ class _HomePageState extends State<HomePage> {
                       str = "1 is neither prime nor composite number";
                     } else if (prime(num)) {
                       str = "${textEditingController.text} is prime number";
+                      factors(num);
                     } else {
                       str =
                           "${textEditingController.text} is a composite number";
-                      print(factors(num));
+                      factors(num);
                     }
                   });
                 },
